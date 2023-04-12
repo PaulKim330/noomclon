@@ -5,5 +5,24 @@ html(lang="en")
         meta(http-equiv="X-UA-Compatible", content="IE=edge")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         title Noom
-    body 
-        h1 It works!
+        link(rel="stylesheet", href="https://unpkg.com/mvp.css@1.12/mvp.css")
+    body
+        header 
+            h1 Noom
+        main
+            div#welcome
+                form
+                    input#roomname(placeholder="room name" required, type="text")
+                    input#nickname(placeholder="nick name" required, type="text")
+                    button Enter Room
+            div#room
+                h3
+                span
+                ul
+                form#msg
+                    input(placeholder="message", required, type="text")
+                    button Send
+
+
+        script(src="/socket.io/socket.io.js")
+        script(src="/public/js/app.js")
