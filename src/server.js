@@ -2,6 +2,7 @@ import http from "http";
 import { Server } from "socket.io";
 import path from 'path';
 const __dirname = path.resolve();
+import { instrument } from "@socket.io/admin-ui";
 import express from "express";
 
 const app = express();
@@ -14,7 +15,18 @@ app.get("/*", (req, res) => res.redirect("/"));
 
 
 const httpServer = http.createServer(app);
-const wsServer = new Server(httpServer);
+const wsServer = new Server(httpServer, {
+    cors: {
+        origin: ["https://admin.socket.io"],
+        credentials: true
+      }
+});
+
+instrument(wsServer, {
+    auth: false,
+    mode: "development",
+  });
+  
 
 function publicRooms(){
     const {
